@@ -1,0 +1,22 @@
+.matrix {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+}
+
+.cell {
+  width: 50px;
+  height: 50px;
+  border: 1px solid black;
+  background-color: white;
+}
+
+.cell.blue {
+  background-color: blue;
+}
+.cell.red {
+  background-color: red;
+}

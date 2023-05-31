@@ -1,38 +1,56 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+
+function GithubRepos() {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/api/data") // Make a GET request to the Python server endpoint
+      .then((response) => response.json())
+      .then((data) => setData(data))
+      .catch((error) => console.error("Error:", error));
+  }, []);
+
+
+  const circularImage = {
+    width: '200px',
+    borderRadius: '50%',
+    border: '4px solid #333',
+    boxShadow: '0 0 10px rgba(0, 0, 0, 0.5)',
+  }
+  return (
+    <div>
+      {data ? (
+        <div className="github-container">
+          <div className='profile-picture'>
+            <a href="https://github.com/R3dPraiseTheSun"><img src={data.image} style={circularImage} /></a>
+            <h3>R3dPraiseTheSun's Public Repo</h3>
+          </div>
+          <div className='projects-container'>
+            <ul>
+              {data.repos.map((repo, index) => (
+                <li key={index}>
+                  <div className='repo-container'>
+                    <h2><a href={`https://github.com/R3dPraiseTheSun/${repo.title}`}>{repo.title}</a></h2>
+                    <p><b>Project description:</b> {repo.description}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      ) : (
+        <p>Loading...</p>
+      )}
+    </div>
+  );
+}
 
 const Home = () => {
-  const projects = [
-    {
-      title: 'Project 1',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae commodo urna. Nulla facilisi. Fusce ut ex id felis rhoncus rutrum.',
-      imageUrl: 'project1.jpg',
-      githubUrl: 'https://github.com/project1',
-      demoUrl: 'https://demo.project1.com',
-    },
-    {
-      title: 'Project 2',
-      description: 'Sed non urna id mi dapibus feugiat. Fusce malesuada risus eget mauris eleifend fringilla. Donec auctor orci id eleifend volutpat.',
-      imageUrl: 'project2.jpg',
-      githubUrl: 'https://github.com/project2',
-      demoUrl: 'https://demo.project2.com',
-    },
-    // Add more project objects as needed
-  ];
 
   return (
-    <div className="homepage">
-      <h1>Student CV Website</h1>
-      <h2>Passion Projects</h2>
-      <div className="project-container">
-        {projects.map((project, index) => (
-          <div key={index}>
-            <h3>{project.title}</h3>
-            <p>{project.description}</p>
-            <img src={project.imageUrl} alt={project.title} />
-            <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">GitHub Repo</a>
-          </div>
-        ))}
-      </div>
+    <div className="homepage" style={{height:'100%'}}>
+      <h1>Lates Github Activity</h1>
+      {GithubRepos()}
     </div>
   );
 };

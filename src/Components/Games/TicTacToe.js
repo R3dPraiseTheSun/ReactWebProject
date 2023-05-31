@@ -37,7 +37,7 @@ const TicTacToe = () => {
   }
 
   const handleCellClick = (row, col) => {
-    if (board[row][col] === null) {
+    if (board[row][col] === null && winner === null) {
       const newBoard = [...board];
       newBoard[row][col] = currentPlayer;
       setBoard(newBoard);

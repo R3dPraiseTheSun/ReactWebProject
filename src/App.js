@@ -7,12 +7,13 @@ import Games from './Pages/Games';
 import About from './Pages/About';
 import Contact from './Pages/Contact';
 
+import "./App.css";
+
 const App = () => {
   return (
     <Router>
-    <div>
-      <Navbar />
       <h1>Welcome to my website!</h1>
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/games/*" element={<Games />} />
@@ -20,7 +21,6 @@ const App = () => {
         <Route path="/contact" element={<Contact />} />
       </Routes>
       {/* Other content */}
-    </div>
     </Router>
   );
 }

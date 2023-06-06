@@ -4,7 +4,7 @@ function GithubRepos() {
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/data") // Make a GET request to the Python server endpoint
+    fetch("/api/data") // Make a GET request to the Python server endpoint
       .then((response) => response.json())
       .then((data) => setData(data))
       .catch((error) => console.error("Error:", error));
